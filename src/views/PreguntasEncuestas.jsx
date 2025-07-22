@@ -16,7 +16,7 @@ export default function PreguntasEncuestas() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [responseSubmitted, setResponseSubmitted] = useState(false)
-  const [submitting, setSubmitting] = useState(false) 
+  const [submitting, setSubmitting] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function PreguntasEncuestas() {
         const result = await getQuestionsBySurveyId(id)
 
         if (result.success) {
-          setQuestions(result.data.data.data || []) 
+          setQuestions(result.data.data.data || [])
         } else {
           setError(result.error || 'Error al cargar las preguntas')
         }
@@ -77,9 +77,6 @@ export default function PreguntasEncuestas() {
         return
       }
 
-      console.log('🔍 DEBUG - Survey ID:', id, typeof id)
-      console.log('🔍 DEBUG - Answers:', answers)
-      console.log('🔍 DEBUG - Questions count:', questions.length)
 
       const formattedData = {
         survey_id: parseInt(id),
@@ -183,13 +180,32 @@ export default function PreguntasEncuestas() {
   return (
     <div className="container max-w-4xl p-4 mx-auto">
       <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold text-gray-800">
-          Encuesta #{id}
-        </h1>
-        <p className="text-gray-600">
-          Responde todas las preguntas y envía tu encuesta
-        </p>
+
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h1 className="mb-2 text-3xl font-bold text-gray-800">
+              Encuesta #{id}
+            </h1>
+            <p className="text-gray-600">
+              Responde todas las preguntas y envía tu encuesta
+            </p>
+          </div>
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center px-4 py-2 space-x-2 font-medium text-gray-600 hover:text-gray-800"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span>Volver</span>
+          </button>
+        </div>
+
+
       </div>
+
+
+
 
       {/* Progreso */}
       <div className="mb-8">
