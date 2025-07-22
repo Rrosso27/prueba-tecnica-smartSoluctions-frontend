@@ -1,4 +1,3 @@
-// Configuración de la API
 export const API_CONFIG = {
   BASE_URL: 'http://127.0.0.1:8000/api',
   ENDPOINTS: {
@@ -6,11 +5,14 @@ export const API_CONFIG = {
     REGISTER: '/register',
     LOGOUT: '/logout',
     USER: '/user',
+    SURVEYS: '/surveys',
+    QUESTIONS : '/questions',
+    RESPONSES: '/responses',
+
   },
-  TIMEOUT: 10000, // 10 segundos
+  TIMEOUT: 10000, 
 }
 
-// Configuración de autenticación
 export const AUTH_CONFIG = {
   TOKEN_KEY: 'access_token',
   USER_KEY: 'user_data',

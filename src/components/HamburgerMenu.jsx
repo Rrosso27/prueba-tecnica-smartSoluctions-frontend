@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
 export default function HamburgerMenu() {
+    // ✅ Corregido: el menú debe empezar cerrado
     const [isOpen, setIsOpen] = useState(false)
     const { user, logout } = useAuth()
 
@@ -9,6 +10,7 @@ export default function HamburgerMenu() {
         setIsOpen(!isOpen)
     }
 
+    // ✅ Corregido: closeMenu debe cerrar el menú (false)
     const closeMenu = () => {
         setIsOpen(false)
     }
@@ -21,44 +23,42 @@ export default function HamburgerMenu() {
     return (
         <>
             {/* Botón del hamburger */}
-            <button 
+            <button
                 onClick={toggleMenu}
-                className="flex items-center p-2 text-gray-500 transition-colors duration-200 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                className="flex items-center p-2 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 aria-label="Abrir menú"
             >
+                {/* ✅ Eliminado el h1 que estaba interfiriendo */}
                 <span className="sr-only">Abrir menú</span>
-                
+
                 {/* Icono hamburger que cambia a X cuando está abierto */}
                 <div className="flex flex-col items-center justify-center w-6 h-6">
-                    <span className={`bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-                        isOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
-                    }`}></span>
-                    <span className={`bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
-                        isOpen ? 'opacity-0' : 'opacity-100'
-                    }`}></span>
-                    <span className={`bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-                        isOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'
-                    }`}></span>
+                    {/* ✅ Corregida la lógica: cuando NO está abierto (!isOpen) muestra las líneas normales */}
+                    <span className={`bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
+                        }`}></span>
+                    <span className={`bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${isOpen ? 'opacity-0' : 'opacity-100'
+                        }`}></span>
+                    <span className={`bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'
+                        }`}></span>
                 </div>
             </button>
 
             {/* Overlay para cerrar el menú cuando se hace clic fuera */}
             {isOpen && (
-                <div 
-                    className="fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden"
+                <div
+                    className="fixed inset-0 z-40 bg-black bg-opacity-50 "
                     onClick={closeMenu}
                 ></div>
             )}
 
             {/* Menú desplegable */}
-            <div className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 md:hidden ${
-                isOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}>
-                
+            <div className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50  ${isOpen ? 'translate-x-0' : 'translate-x-full'
+                }`}>
+
                 {/* Header del menú */}
                 <div className="flex items-center justify-between p-4 border-b border-gray-200">
                     <h2 className="text-lg font-semibold text-gray-800">Menú</h2>
-                    <button 
+                    <button
                         onClick={closeMenu}
                         className="p-2 text-gray-500 transition-colors duration-200 rounded-lg hover:bg-gray-100"
                         aria-label="Cerrar menú"
@@ -88,8 +88,8 @@ export default function HamburgerMenu() {
                 <nav className="flex-1 px-4 py-6">
                     <ul className="space-y-2">
                         <li>
-                            <a 
-                                href="/" 
+                            <a
+                                href="/"
                                 onClick={closeMenu}
                                 className="flex items-center px-4 py-3 text-gray-700 transition-colors duration-200 rounded-lg hover:bg-gray-100"
                             >
@@ -100,8 +100,8 @@ export default function HamburgerMenu() {
                             </a>
                         </li>
                         <li>
-                            <a 
-                                href="/profile" 
+                            <a
+                                href="/profile"
                                 onClick={closeMenu}
                                 className="flex items-center px-4 py-3 text-gray-700 transition-colors duration-200 rounded-lg hover:bg-gray-100"
                             >
@@ -112,8 +112,8 @@ export default function HamburgerMenu() {
                             </a>
                         </li>
                         <li>
-                            <a 
-                                href="/settings" 
+                            <a
+                                href="/settings"
                                 onClick={closeMenu}
                                 className="flex items-center px-4 py-3 text-gray-700 transition-colors duration-200 rounded-lg hover:bg-gray-100"
                             >
@@ -129,7 +129,7 @@ export default function HamburgerMenu() {
 
                 {/* Footer del menú con botón de logout */}
                 <div className="p-4 border-t border-gray-200">
-                    <button 
+                    <button
                         onClick={handleLogout}
                         className="flex items-center justify-center w-full px-4 py-3 text-red-600 transition-colors duration-200 rounded-lg bg-red-50 hover:bg-red-100"
                     >

@@ -5,6 +5,8 @@ import Register from '../views/Register.jsx'
 import ProtectedRoute from '../components/ProtectedRoute.jsx'
 import PublicRoute from '../components/PublicRoute.jsx'
 import AuthLayout from "../layouts/AuthLayout.jsx";
+import PreguntasEncuestas from "../views/PreguntasEncuestas.jsx";
+import ResultadosEncuesta from "../views/ResultadosEncuesta.jsx";
 const router = createBrowserRouter([
   {
     path: '/login',
@@ -31,9 +33,17 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        index: true,
+        index: true, // ✅ Esta es la ruta principal "/"
         element: <Inicio />
       },
+      {
+        path: 'preguntas-encuestas/:id', // ✅ Usar path, no index
+        element: <PreguntasEncuestas />
+      },
+      {
+        path: "/resultados-encuesta/:id",
+        element: <ResultadosEncuesta />
+      }
     ]
   },
 ]);

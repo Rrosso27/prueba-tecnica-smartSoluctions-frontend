@@ -129,7 +129,7 @@ export const verifyToken = async () => {
   } catch (error) {
     return {
       success: false,
-      error: 'Token inválido',
+      error: 'Token inválido' + (error.message ? `: ${error.message}` : ''),
     }
   }
 }
