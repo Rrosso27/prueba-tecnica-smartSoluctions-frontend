@@ -1,3 +1,8 @@
+  # Clonación del repositorio.
+   ~~~bash  
+    git clone https://github.com/Rrosso27/prueba-tecnica-smartSoluctions-frontend.git
+  ~~~
+
   ## Instalar dependencias con npm 🚀  
   ~~~bash  
   npm install
